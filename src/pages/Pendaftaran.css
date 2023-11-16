@@ -1,0 +1,18 @@
+.contentPendaftaran{
+    padding-top: 40px;
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.contentPendaftaranImg{
+    width: 280px;
+}
+
+@media screen and (min-width:768px) {
+    .contentPendaftaran{
+        padding-top: 10px;
+        padding-bottom: 10px;
+        width: 40%;
+        margin: auto;
+    }
+}

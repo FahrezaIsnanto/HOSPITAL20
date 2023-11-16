@@ -1,0 +1,17 @@
+.contentJadwalDokter{
+    padding-top: 120px;
+    text-align: center;
+}
+
+.contentJadwalDokterImg{
+    width: 280px;
+}
+
+
+@media screen and (min-width:768px) {
+    .contentJadwalDokter{
+        padding-top: 10px;
+        width: 40%;
+        margin: auto;
+    }
+}

@@ -1,0 +1,13 @@
+.buktiCard{
+    width: 100%;
+    border-radius: 20px;
+    border: 1px solid #585e84;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: left;
+    font-size: 14px;
+}
+
+.qrCode{
+   text-align: right;
+}

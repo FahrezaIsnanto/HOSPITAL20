@@ -1,0 +1,26 @@
+.contentDetailJadwalDokter{
+    padding-top: 120px;
+    text-align: center;
+}
+
+.contentDetailJadwalDokterImg{
+    width: 280px;
+}
+
+.cardDetailJadwalDokter{
+    width: 100%;
+    border-radius: 20px;
+    border: 1px solid #585e84;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: left;
+    font-size: 14px;
+}
+
+@media screen and (min-width:768px) {
+    .contentDetailJadwalDokter{
+        padding-top: 10px;
+        width: 40%;
+        margin: auto;
+    }
+}

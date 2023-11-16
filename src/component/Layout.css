@@ -1,0 +1,28 @@
+.main {
+  padding: 5px 10px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-brand {
+  color: #e4853c;
+  font-size: 26px;
+  letter-spacing: 5px;
+  font-weight: bold;
+}
+
+.header-version {
+  color: #585e84;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+@media screen and (min-width: 768px) {
+  .main {
+    padding: 5px 30px;
+  }
+}

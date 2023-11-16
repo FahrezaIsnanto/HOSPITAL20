@@ -1,0 +1,25 @@
+.inputWrapper {
+  width: 90%;
+  margin: auto;
+}
+
+.inputWrapper .label {
+  text-align: left !important;
+  font-size: 16px;
+  color: #585e84;
+  margin: 0px;
+  margin-bottom: 6px;
+}
+
+.inputWrapper .input {
+  border: 1px solid grey;
+  padding: 12px;
+  border-radius: 8px;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
+}

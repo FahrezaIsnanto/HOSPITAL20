@@ -1,0 +1,38 @@
+.contentAbout{
+    padding-top: 120px;
+    text-align: center;
+}
+
+.contentAboutImg{
+    width: 280px;
+}
+
+.contentAboutTitle{
+    color: #e4853c;
+    font-size: 36px;
+    line-height: 16px;
+}
+
+.contentAboutVersion{
+    color: #585e84;
+    font-size: 18px;
+    font-weight: 300;
+}
+
+.contentAboutBody{
+    color: #585e84;
+    line-height: 32px;
+    font-size: 18px;
+}
+
+
+@media screen and (min-width:768px) {
+    .contentAbout{
+        padding-top: 88px;
+    }
+
+    .contentAboutBody{
+        margin: auto;
+        width: 50%;
+    }
+}

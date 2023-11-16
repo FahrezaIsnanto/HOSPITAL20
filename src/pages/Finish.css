@@ -1,0 +1,23 @@
+.contentFinish{
+    padding-top: 120px;
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.contentFinishImg{
+    width: 280px;
+}
+
+.contentFinishBody{
+    color: #585e84;
+    line-height: 26px;
+    font-size: 14px;
+}
+
+@media screen and (min-width:768px) {
+    .contentFinish{
+        padding-top: 10px;
+        margin: auto;
+        width: 50%;
+    }
+}
