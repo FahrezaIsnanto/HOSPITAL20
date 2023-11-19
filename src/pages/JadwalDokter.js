@@ -13,7 +13,7 @@ export default function JadwalDokter() {
     async function fetchJadwalDokter() {
       try {
         const response = await axios.get(
-          "http://localhost:8021/jadwalDokter"
+          "https://hospital20-api-rtfpcq2a4a-et.a.run.app/jadwalDokter"
         );
         if (response.status === 200) {
           setData(response.data);

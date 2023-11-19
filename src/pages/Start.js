@@ -27,7 +27,7 @@ export default function Start() {
   const handleCheckPasien = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8021/pasien",
+        "https://hospital20-api-rtfpcq2a4a-et.a.run.app/pasien",
         {
           params: {
             no_rm_pasien: rekamMedis,

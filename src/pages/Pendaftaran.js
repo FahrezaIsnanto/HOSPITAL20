@@ -42,7 +42,7 @@ export default function Pendaftaran() {
     const nama_pasien = dataPasien.nama_pasien;
     try {
       const response = await axios.post(
-        "http://localhost:8021/pendaftaran",
+        "https://hospital20-api-rtfpcq2a4a-et.a.run.app/pendaftaran",
         {
           id,
           no_rm_pasien: user.no_rm_pasien,
@@ -64,7 +64,7 @@ export default function Pendaftaran() {
   const fetchJadwalDokter = async (nama_poli, id_hari) => {
     try {
       const response = await axios.get(
-        "http://localhost:8021/jadwalDokter",
+        "https://hospital20-api-rtfpcq2a4a-et.a.run.app/jadwalDokter",
         {
           params: {
             nama_poli,
@@ -93,7 +93,7 @@ export default function Pendaftaran() {
     async function fetchPoli() {
       try {
         const response = await axios.get(
-          "http://localhost:8021/poli"
+          "https://hospital20-api-rtfpcq2a4a-et.a.run.app/poli"
         );
         if (response.status === 200) {
           setDataPoli(response.data);

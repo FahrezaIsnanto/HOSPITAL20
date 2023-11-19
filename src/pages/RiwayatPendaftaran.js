@@ -23,7 +23,7 @@ export default function RiwayatPendaftaran() {
     async function fetchRiwayatPendaftaran() {
       try {
         const response = await axios.get(
-          "http://localhost:8021/pendaftaran",
+          "https://hospital20-api-rtfpcq2a4a-et.a.run.app/pendaftaran",
           {
             params: {
               no_rm_pasien: user.no_rm_pasien,

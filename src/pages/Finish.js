@@ -32,7 +32,7 @@ export default function Finish() {
     async function fetchPendaftaran() {
       try {
         const response = await axios.get(
-          "http://localhost:8021/pendaftaran",
+          "https://hospital20-api-rtfpcq2a4a-et.a.run.app/pendaftaran",
           {
             params: {
               id,
