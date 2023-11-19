@@ -1,0 +1,7 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [ 'build', '-t', 'gcr.io/fahrezaisnantodev/hospital20:$SHORT_SHA','.']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [ 'push', 'gcr.io/fahrezaisnantodev/hospital20:$SHORT_SHA']
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: [ 'run', 'deploy', 'hospital20', '--image=gcr.io/fahrezaisnantodev/hospital20:$SHORT_SHA', '--region=asia-southeast2', '--allow-unauthenticated']
