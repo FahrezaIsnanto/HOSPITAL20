@@ -7,6 +7,7 @@ import RiwayatCard from "../component/RiwayatCard";
 import "./RiwayatPendaftaran.css";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { LoadSessFromStorage } from "../helper/LoadSessFromStorage";
 
 export default function RiwayatPendaftaran() {
   const { isLoggedIn, setIsLoggedIn, user, setUser } = useContext(AuthContext)
@@ -14,37 +15,57 @@ export default function RiwayatPendaftaran() {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    function validatePage(){
-      if(!isLoggedIn){
-        navigate('/start');
-      }
-    }
-    validatePage();
     async function fetchRiwayatPendaftaran() {
       try {
-        const response = await axios.get(
-          "https://hospital20-api-rtfpcq2a4a-et.a.run.app/pendaftaran",
-          {
-            params: {
-              no_rm_pasien: user.no_rm_pasien,
-            },
+        setIsLoading(true);
+        if(user.no_rm_pasien){
+          const response = await axios.get(
+            "https://hospital20-api-rtfpcq2a4a-et.a.run.app/pendaftaran",
+            {
+              params: {
+                no_rm_pasien: user.no_rm_pasien,
+              },
+            }
+          );
+          if (response.status === 200) {
+            console.log(response.data);
+            setData(response.data);
+            setIsLoading(false);
           }
-        );
-        if (response.status === 200) {
-          setData(response.data);
         }
       } catch (err) {
         console.log("err", err);
       }
     }
-    async function fetchData() {
-      setIsLoading(true);
-      await fetchRiwayatPendaftaran();
-      setIsLoading(false);
+    fetchRiwayatPendaftaran();
+  }, [isLoggedIn]);
+
+  useEffect(function(){
+    function validatePage(){
+        const sessionStorage = LoadSessFromStorage();
+        var isStorageExists = false;
+        var pathName = window.location.pathname;
+
+        if (!isLoggedIn) {
+          if(sessionStorage){
+            setIsLoggedIn(sessionStorage.isLoggedIn);
+            setUser(JSON.parse(sessionStorage.user));
+            isStorageExists = true;
+          }
+        }
+      
+        if (pathName != "/" && pathName != "/start") {
+          if (!isLoggedIn && !isStorageExists) {
+            window.location.href = "/start";
+          }
+        } else {
+          if (isLoggedIn || isStorageExists) {
+            window.location.href = "/pendaftaran";
+          }
+      }
     }
     validatePage();
-    fetchData();
-  }, []);
+},[]);
 
   return (
     <Layout>

@@ -7,18 +7,36 @@ import "./Welcome.css";
 import { AuthContext } from "../context/AuthContext";
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { LoadSessFromStorage } from "../helper/LoadSessFromStorage";
 
 export default function Welcome(){
     const { isLoggedIn, setIsLoggedIn, user, setUser } = useContext(AuthContext)
-    const navigate = useNavigate();
-    useEffect(() => {
+    useEffect(function(){
         function validatePage(){
-          if(isLoggedIn){
-            navigate('/pendaftaran');
+            const sessionStorage = LoadSessFromStorage();
+            var isStorageExists = false;
+            var pathName = window.location.pathname;
+    
+            if (!isLoggedIn) {
+              if(sessionStorage){
+                setIsLoggedIn(sessionStorage.isLoggedIn);
+                setUser(JSON.parse(sessionStorage.user));
+                isStorageExists = true;
+              }
+            }
+          
+            if (pathName != "/" && pathName != "/start") {
+              if (!isLoggedIn && !isStorageExists) {
+                window.location.href = "/start";
+              }
+            } else {
+              if (isLoggedIn || isStorageExists) {
+                window.location.href = "/pendaftaran";
+              }
           }
         }
         validatePage();
-      },[]);
+    },[]);
     return (
         <Layout>
             <div className="contentWelcome">

@@ -12,6 +12,8 @@ export default function PasienCard({pasien}){
         let text = "Apakah yakin Anda ingin keluar?.";
         if (window.confirm(text) == true) {
             setIsLoggedIn(false);
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('user');
             navigate('/start');
         }
     };

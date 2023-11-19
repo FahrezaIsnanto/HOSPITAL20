@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Welcome from './pages/Welcome'
 import Start from './pages/Start';
 import Pendaftaran from './pages/Pendaftaran';
 import { HiHome } from 'react-icons/hi'
 import { MdGroup } from 'react-icons/md'
-import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, NavLink, useNavigate } from 'react-router-dom'
 import './App.css';
 import Finish from './pages/Finish';
 import RiwayatPendaftaran from './pages/RiwayatPendaftaran';

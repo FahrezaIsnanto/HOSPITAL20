@@ -9,6 +9,7 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import {format} from 'date-fns';
 import { AuthContext } from "../context/AuthContext";
+import { LoadSessFromStorage } from "../helper/LoadSessFromStorage";
 
 export default function Start() {
   const { isLoggedIn, setIsLoggedIn, user, setUser } = useContext(AuthContext)
@@ -38,6 +39,8 @@ export default function Start() {
       if (response.status === 200) {
         setIsLoggedIn(true);
         setUser(response.data[0]);
+        localStorage.setItem('isLoggedIn',true);
+        localStorage.setItem('user',JSON.stringify(response.data[0]));  
         navigate("/pendaftaran");
       } else {
         console.log("data pasien tidak ditemukan");
@@ -47,14 +50,32 @@ export default function Start() {
     }
   };
 
-  useEffect(() => {
+  useEffect(function(){
     function validatePage(){
-      if(isLoggedIn){
-        navigate('/pendaftaran');
+        const sessionStorage = LoadSessFromStorage();
+        var isStorageExists = false;
+        var pathName = window.location.pathname;
+
+        if (!isLoggedIn) {
+          if(sessionStorage){
+            setIsLoggedIn(sessionStorage.isLoggedIn);
+            setUser(JSON.parse(sessionStorage.user));
+            isStorageExists = true;
+          }
+        }
+      
+        if (pathName != "/" && pathName != "/start") {
+          if (!isLoggedIn && !isStorageExists) {
+            window.location.href = "/start";
+          }
+        } else {
+          if (isLoggedIn || isStorageExists) {
+            window.location.href = "/pendaftaran";
+          }
       }
     }
     validatePage();
-  },[]);
+},[]);
 
   return (
     <Layout>

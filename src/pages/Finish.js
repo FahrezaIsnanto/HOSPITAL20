@@ -9,6 +9,7 @@ import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import ButtonPrimary from "../component/ButtonPrimary";
+import { LoadSessFromStorage } from "../helper/LoadSessFromStorage";
 
 export default function Finish() {
   const { isLoggedIn, setIsLoggedIn, user, setUser } = useContext(AuthContext)
@@ -24,11 +25,6 @@ export default function Finish() {
     }
 };
   useEffect(() => {
-    function validatePage(){
-      if(!isLoggedIn){
-        navigate('/start');
-      }
-    }
     async function fetchPendaftaran() {
       try {
         const response = await axios.get(
@@ -51,9 +47,35 @@ export default function Finish() {
       await fetchPendaftaran();
       setIsLoading(false);
     }
-    validatePage();
     fetchData();
   }, [id]);
+
+  useEffect(function(){
+    function validatePage(){
+        const sessionStorage = LoadSessFromStorage();
+        var isStorageExists = false;
+        var pathName = window.location.pathname;
+
+        if (!isLoggedIn) {
+          if(sessionStorage){
+            setIsLoggedIn(sessionStorage.isLoggedIn);
+            setUser(JSON.parse(sessionStorage.user));
+            isStorageExists = true;
+          }
+        }
+      
+        if (pathName != "/" && pathName != "/start") {
+          if (!isLoggedIn && !isStorageExists) {
+            window.location.href = "/start";
+          }
+        } else {
+          if (isLoggedIn || isStorageExists) {
+            window.location.href = "/pendaftaran";
+          }
+      }
+    }
+    validatePage();
+},[]);
   return (
     <Layout>
       <div className="contentFinish">

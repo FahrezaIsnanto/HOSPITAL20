@@ -12,6 +12,7 @@ import "./Pendaftaran.css";
 import axios from "axios";
 import {format} from 'date-fns';
 import { AuthContext } from "../context/AuthContext";
+import { LoadSessFromStorage } from "../helper/LoadSessFromStorage";
 
 export default function Pendaftaran() {
   const { isLoggedIn, setIsLoggedIn, user, setUser } = useContext(AuthContext)
@@ -81,11 +82,6 @@ export default function Pendaftaran() {
   };
 
   useEffect(() => {
-    function validatePage(){
-      if(!isLoggedIn){
-        navigate('/start');
-      }
-    }
     function fetchPasien() {
       setDataPasien(user);
     }
@@ -109,9 +105,35 @@ export default function Pendaftaran() {
       await fetchPoli();
       setIsLoading(false);
     }
-    validatePage();
-    fetchData();
-  }, []);
+  fetchData();
+  }, [isLoggedIn]);
+
+  useEffect(function(){
+    function validatePage(){
+      const sessionStorage = LoadSessFromStorage();
+      var isStorageExists = false;
+      var pathName = window.location.pathname;
+
+      if (!isLoggedIn) {
+        if(sessionStorage){
+          setIsLoggedIn(sessionStorage.isLoggedIn);
+          setUser(JSON.parse(sessionStorage.user));
+          isStorageExists = true;
+        }
+      }
+    
+      if (pathName != "/" && pathName != "/start") {
+        if (!isLoggedIn && !isStorageExists) {
+          window.location.href = "/start";
+        }
+      } else {
+        if (isLoggedIn || isStorageExists) {
+          window.location.href = "/pendaftaran";
+        }
+    }
+  }
+  validatePage();
+  },[]);
 
   return (
     <Layout>
